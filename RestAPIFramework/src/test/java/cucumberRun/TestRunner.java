@@ -8,7 +8,8 @@ import io.cucumber.junit.CucumberOptions;
 @CucumberOptions(
 		features="src/test/java/features",
 		glue={"stepDefinations"},
-		dryRun=true
+		tags = "@AddPlace"
+//		dryRun=true
 		)
 public class TestRunner {
 
