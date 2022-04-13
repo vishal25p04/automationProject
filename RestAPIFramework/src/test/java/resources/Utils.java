@@ -15,14 +15,16 @@ import io.restassured.specification.ResponseSpecification;
 
 public class Utils {
 	
-	RequestSpecification req;
-	ResponseSpecification resSpec;
+	public static RequestSpecification req;
+	public ResponseSpecification resSpec;
 	
 	public RequestSpecification reqSpecification() throws IOException {
+		if(req!=null)
+			return req;
 		PrintStream log = new PrintStream(new FileOutputStream("logging.txt"));
 		req = new RequestSpecBuilder().setBaseUri(getGlobalValue("baseURL")).
 			addQueryParam("key", "qaclick123").setContentType(ContentType.JSON).
-			addFilter(RequestLoggingFilter.logRequestTo(log)).
+			addFilter(RequestLoggingFilter.logRequestTo(log)). 
 			addFilter(ResponseLoggingFilter.logResponseTo(log)).build();
 		return req;
 	}
