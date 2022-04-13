@@ -43,8 +43,16 @@ public class StepDefination extends Utils{
 	
 	@Then("{string} in response body is {string}")
 	public void in_response_body_is(String key, String value) {
-		JsonPath js =new JsonPath(response.asString());
-		assertEquals(js.getString(key), value);
+		String actValue = getJsonPath(response, key);
+		assertEquals(actValue, value);
+	}
+	@Then("verify place_Id created maps to {string} using {string}")
+	public void verify_place_id_created_maps_to_using(String name, String resource) throws IOException {
+		String place_id = getJsonPath(response, "place_id");
+		res =given().spec(reqSpecification()).queryParam("place_id", place_id);
+		user_calls_with_http_method(resource, "GET");
+		String actValue = getJsonPath(response, "name");
+		assertEquals(actValue, name);
 	}
 
 }
