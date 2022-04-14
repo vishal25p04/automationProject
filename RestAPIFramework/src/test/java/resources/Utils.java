@@ -23,7 +23,7 @@ public class Utils {
 	public RequestSpecification reqSpecification() throws IOException {
 		if(req!=null)
 			return req;
-		PrintStream log = new PrintStream(new FileOutputStream("logging.txt"));
+		PrintStream log = new PrintStream(new FileOutputStream("target/logging.txt"));
 		req = new RequestSpecBuilder().setBaseUri(getGlobalValue("baseURL")).
 			addQueryParam("key", "qaclick123").setContentType(ContentType.JSON).
 			addFilter(RequestLoggingFilter.logRequestTo(log)). 
@@ -39,7 +39,7 @@ public class Utils {
 	
 	public String getGlobalValue(String key) throws IOException {
 		Properties prop = new Properties();
-		FileInputStream fis = new FileInputStream("C:\\Users\\vishal\\Documents\\GitHub\\automationProject\\RestAPIFramework\\src\\test\\java\\resources\\global.properties");
+		FileInputStream fis = new FileInputStream("src\\test\\java\\resources\\global.properties");
 		prop.load(fis);
 		return prop.getProperty(key);
 	}
